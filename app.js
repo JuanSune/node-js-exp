@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-mongoose.connect('mongodb://127.0.0.1/test').then(() => {
+mongoose.connect('mongodb://127.0.0.1/TodosUsuarios').then(() => {
     console.log("Conectado ao MongoDB")
 }).catch((err) => {
     console.log("Houve o seguinte erro"+err)
