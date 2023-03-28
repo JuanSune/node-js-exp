@@ -1,31 +1,63 @@
-const mongoose = require("mongoose")
+// Carregando Modulos
 
-mongoose.connect('mongodb://127.0.0.1/TodosUsuarios').then(() => {
-    console.log("Conectado ao MongoDB")
-}).catch((err) => {
-    console.log("Houve o seguinte erro"+err)
-})
+const expressMod = require('express');
 
-const UsuarioSchema = mongoose.Schema({
-    nome:{
-        type:String,
-        require:true
-    },
-    sobrenome:{
-        type:String,
-        require:true
-    }
-})
+const handlebarsMod = require('express-handlebars');
 
-mongoose.model('usuarios', UsuarioSchema)
+const appMod = expressMod();
 
-const Victor = mongoose.model('usuarios')
+const PORT = 8081;
 
-new Victor({
-    nome:'Juanzito',
-    sobrenome:'Yami'
-}).save().then(() => {
-    console.log("Foi cadastrado o usuario")
-}).catch((err) => {
-    console.log("Deu o seguinte erro: "+err)
-})
+// const mongoose = require("mongoose");
+
+// Configuraçoes
+
+    // Body Parser
+    appMod.use(expressMod.urlencoded({extended: true}));
+    appMod.use(expressMod.json());
+
+    // Handlebars
+    appMod.engine('handlebars', handlebarsMod.engine({defaultLayout: 'main'}))
+    appMod.set('view engine','handlebars');
+    // Mongoose
+        // Em breve
+
+// Rotas
+
+// Outros
+
+appMod.listen(PORT, () => {
+    console.log("Servidor Rodando!!");
+});
+
+
+// -----------------------------------------------------------------------------------
+// mongoose.connect('mongodb://127.0.0.1/TodosUsuarios').then(() => {
+//     console.log("Conectado ao MongoDB")
+// }).catch((err) => {
+//     console.log("Houve o seguinte erro"+err)
+// })
+
+// const UsuarioSchema = mongoose.Schema({
+//     nome:{
+//         type:String,
+//         require:true
+//     },
+//     sobrenome:{
+//         type:String,
+//         require:true
+//     }
+// })
+
+// mongoose.model('usuarios', UsuarioSchema)
+
+// const Victor = mongoose.model('usuarios')
+
+// new Victor({
+//     nome:'Juanzito',
+//     sobrenome:'Yami'
+// }).save().then(() => {
+//     console.log("Foi cadastrado o usuario")
+// }).catch((err) => {
+//     console.log("Deu o seguinte erro: "+err)
+// })
