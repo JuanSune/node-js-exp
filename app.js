@@ -8,6 +8,8 @@ const appMod = expressMod();
 
 const PORT = 8081;
 
+const adminImport = require('./rotas/admin')
+
 // const mongoose = require("mongoose");
 
 // Configuraçoes
@@ -22,7 +24,11 @@ const PORT = 8081;
     // Mongoose
         // Em breve
 
-// Rotas
+// Rotas --- COLOQUE AS ROTAS ABAIXO DA SUA CONFIGURAÇÃO
+
+    appMod.use('/lex',adminImport);
+
+
 
 // Outros
 
