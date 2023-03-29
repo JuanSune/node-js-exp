@@ -8,7 +8,10 @@ const appMod = expressMod();
 
 const PORT = 8081;
 
-const adminImport = require('./rotas/admin')
+const adminImport = require('./rotas/admin');
+
+const pathMod = require('path');
+
 
 // const mongoose = require("mongoose");
 
@@ -23,6 +26,8 @@ const adminImport = require('./rotas/admin')
     appMod.set('view engine','handlebars');
     // Mongoose
         // Em breve
+    // Public
+    appMod.use(expressMod.static(pathMod.join(__dirname,"public")));
 
 // Rotas --- COLOQUE AS ROTAS ABAIXO DA SUA CONFIGURAÇÃO
 

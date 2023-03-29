@@ -4,7 +4,7 @@ const routerAll = expressADMIN.Router();
 
 
 routerAll.get('/',(req,res) => {
-    res.send("Pagina principal do site");
+    res.render("admin/index");
 });
 
 routerAll.get('/posts',(req,res) => {
