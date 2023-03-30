@@ -27,11 +27,11 @@ const pathMod = require('path');
     // Mongoose
         // Em breve
     // Public
-    appMod.use(expressMod.static(pathMod.join(__dirname,"public")));
+    appMod.use(expressMod.static(pathMod.join(__dirname,'/public')));
 
 // Rotas --- COLOQUE AS ROTAS ABAIXO DA SUA CONFIGURAÇÃO
 
-    appMod.use('/lex',adminImport);
+    appMod.use('/admin',adminImport);
 
 
 
