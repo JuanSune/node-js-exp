@@ -12,7 +12,12 @@ routerAll.get('/posts',(req,res) => {
 });
 
 routerAll.get('/categorias',(req,res) => {
-    res.send("Pagina de categorias");
+    res.render("admin/categorias");
 });
+
+routerAll.get('/categorias/add',(req,res) => {
+    res.render('admin/addCategorias');
+});
+
 
 module.exports = routerAll;

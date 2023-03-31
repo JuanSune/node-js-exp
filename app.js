@@ -13,7 +13,7 @@ const adminImport = require('./rotas/admin');
 const pathMod = require('path');
 
 
-// const mongoose = require("mongoose");
+ const mongooseModule = require("mongoose");
 
 // Configuraçoes
 
@@ -26,6 +26,11 @@ const pathMod = require('path');
     appMod.set('view engine','handlebars');
     // Mongoose
         // Em breve
+        mongooseModule.connect('mongodb://127.0.0.1/banco').then(() => {
+            console.log('Conectado com sucesso')
+        }).catch((err => {
+            console.log('O erro foi '+err)
+        })) ;
     // Public
     appMod.use(expressMod.static(pathMod.join(__dirname,'/public')));
 
