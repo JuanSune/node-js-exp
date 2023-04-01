@@ -24,6 +24,23 @@ routerAll.get('/categorias/add',(req,res) => {
 });
 
 routerAll.post('/categorias/nova',(req,res) => {
+
+    var errosVar = []
+
+    if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
+        errosVar.push({texto: "Nome invalido"})
+    }
+    if(!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null){
+        errosVar.push({texto: "Slug invalido"})
+    }
+    if(req.body.nome.length < 2){
+        errosVar.push({texto: "Nome da categoria pequeno"})
+    }
+
+    if(errosVar.length > 0){
+        res.render("admin/addCategorias",{errosHonor:errosVar})
+    }
+
     const novaCategoria = {
         nome: req.body.nome,
         slug: req.body.slug

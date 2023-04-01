@@ -15,7 +15,28 @@ const pathMod = require('path');
 
  const mongooseModule = require("mongoose");
 
+const sessionModule = require("express-session");
+
+const flashModule = require("connect-flash");
+
+
+
 // Configuraçoes
+
+
+    // Sessao
+    appMod.use(sessionModule({
+        secret: "cursonode",
+        resave: true,
+        saveUninitialized: true
+    }));
+    appMod.use(flashModule());
+    // Middleware
+    appMod.use((req, res, next) => {
+        res.locals.success_msg = req.flash("Mensagem sucesso") 
+        res.locals.error_msg = req.flash("Mensagem erro") 
+        next()
+    });
 
     // Body Parser
     appMod.use(expressMod.urlencoded({extended: true}));
@@ -25,7 +46,6 @@ const pathMod = require('path');
     appMod.engine('handlebars', handlebarsMod.engine({defaultLayout: 'main'}))
     appMod.set('view engine','handlebars');
     // Mongoose
-        // Em breve
         mongooseModule.connect('mongodb://127.0.0.1/banco').then(() => {
             console.log('Conectado com sucesso')
         }).catch((err => {
