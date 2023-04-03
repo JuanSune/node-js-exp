@@ -65,7 +65,11 @@ routerAll.post('/categorias/nova',(req,res) => {
 
     }
 
-    
+   
+});
+
+routerAll.get('/categorias/edit/:id',(req,res) =>{
+    res.render('admin/editCategorias')
 });
 
 module.exports = routerAll;
