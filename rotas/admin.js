@@ -16,7 +16,15 @@ routerAll.get('/posts',(req,res) => {
 });
 
 routerAll.get('/categorias',(req,res) => {
-    res.render("admin/categorias");
+    CategoriaDaqui.find().lean().then(
+        (categorias) => {
+            res.render("admin/categorias", {categorias: categorias})
+        }
+    ).catch((err) => {
+        req.flash("msg_erro","Houve um erro no carregamento da lista de categorias")
+        res.redirect("/admin")
+    })
+  
 });
 
 routerAll.get('/categorias/add',(req,res) => {
@@ -40,17 +48,24 @@ routerAll.post('/categorias/nova',(req,res) => {
     if(errosVar.length > 0){
         res.render("admin/addCategorias",{errosHonor:errosVar})
     }
+    else{
+        const novaCategoria = {
+            nome: req.body.nome,
+            slug: req.body.slug
+        }
+    
+        new CategoriaDaqui(novaCategoria).save().then(() => {
+            Ca
+            req.flash("msg_sucesso","Categoria criada com sucesso!" )
+            res.redirect("/admin/categorias");
+        }).catch((err) => { 
+            req.flash("msg_erro","Categoria nao foi criada" )
+            res.redirect("/admin/categorias");
+        })
 
-    const novaCategoria = {
-        nome: req.body.nome,
-        slug: req.body.slug
     }
 
-    new CategoriaDaqui(novaCategoria).save().then(() => {
-        console.log('Ocorreu tudo bem, a categoria foi salva')
-    }).catch((err) => { 
-        console.log('Aconteceu o seguinte erro: '+err)
-    })
+    
 });
 
 module.exports = routerAll;
