@@ -69,7 +69,14 @@ routerAll.post('/categorias/nova',(req,res) => {
 });
 
 routerAll.get('/categorias/edit/:id',(req,res) =>{
-    res.render('admin/editCategorias')
+    CategoriaDaqui.findOne({_id:req.params.id}).lean().then((categoria) => {
+
+        res.render('admin/editCategorias',{categoria:categoria})
+    }).catch((err) => {
+        req.flash("msg_erro","Esta categoria não exista")
+        res.send("/admin/categorias")
+    })
+    
 });
 
 module.exports = routerAll;
