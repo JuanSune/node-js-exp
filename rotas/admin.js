@@ -55,7 +55,7 @@ routerAll.post('/categorias/nova',(req,res) => {
         }
     
         new CategoriaDaqui(novaCategoria).save().then(() => {
-            Ca
+            
             req.flash("msg_sucesso","Categoria criada com sucesso!" )
             res.redirect("/admin/categorias");
         }).catch((err) => { 
@@ -74,7 +74,7 @@ routerAll.get('/categorias/edit/:id',(req,res) =>{
         res.render('admin/editCategorias',{categoria:categoria})
     }).catch((err) => {
         req.flash("msg_erro","Esta categoria não exista")
-        res.send("/admin/categorias")
+        res.redirect("/admin/categorias")
     })
     
 });
