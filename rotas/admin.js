@@ -79,4 +79,16 @@ routerAll.get('/categorias/edit/:id',(req,res) =>{
     
 });
 
+ routerAll.post("/categorias/edit", (req,res)=>{
+
+    CategoriaDaqui.update({nome:req.body.nome, slug:req.body.slug}, {where: {"_id": req.body._id}}).then(()=>{
+        req.flash("success_msg","Categoria editada com sucesso!")
+        res.redirect("/admin/categorias")
+    
+    }).catch((error)=>{
+         req.flash("error_msg", "Houve um erro ao salvar a edição da categoria")
+         res.redirect("/admin/categorias")
+    })
+})
+
 module.exports = routerAll;
