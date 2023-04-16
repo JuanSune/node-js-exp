@@ -88,12 +88,8 @@ routerAll.get("/categorias/edit/:id", (req, res) => {
     });
 });
 
-routerAll.get("/categorias/edit", (req, res) => {
-  CategoriaDaqui.where({_id: req.body.id}).update({nome:req.body.nome, slug:req.body.slug}).then(() =>{
-    res.redirect("/admin/categorias")
-  })
-    
-    
+routerAll.post("admin/categorias/edit", (req, res) => {
+  res.redirect("/admin/categorias");
 });
 
 module.exports = routerAll;
