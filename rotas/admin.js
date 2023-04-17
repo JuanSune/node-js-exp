@@ -88,8 +88,8 @@ routerAll.get("/categorias/edit/:id", (req, res) => {
     });
 });
 
-routerAll.post("admin/categorias/edit", (req, res) => {
-  res.redirect("/admin/categorias");
+routerAll.post("/categorias/edit", (req, res) => {
+  res.send("Seja bem vindo, porque funcionou")
 });
 
 module.exports = routerAll;
