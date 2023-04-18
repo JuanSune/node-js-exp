@@ -88,7 +88,8 @@ routerAll.get("/categorias/edit/:id", (req, res) => {
     });
 });
 
-routerAll.post("/categorias/edit", (req, res) => {
+routerAll.post("/categorias/edit/", (req, res) => {
+  
   res.send("Seja bem vindo, porque funcionou")
 });
 
