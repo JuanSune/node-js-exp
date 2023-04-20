@@ -89,7 +89,18 @@ routerAll.get("/categorias/edit/:id", (req, res) => {
 });
 
 routerAll.post("/categorias/edit/", (req, res) => {
-  res.send("Seja bem vindo, porque funcionou");
+
+ 
+  
+  CategoriaDaqui.findOneAndUpdate({_id: req.body.id}, {nome:req.body.nome, slug:req.body.slug}).then(() => {
+    req.flash("msg_sucesso", "Categoria editada com sucesso!");
+    res.redirect("/admin/categorias");
+  });
+  
+  // res.send("Seja bem vindo, porque funcionou");
+  
 });
+
+
 
 module.exports = routerAll;
