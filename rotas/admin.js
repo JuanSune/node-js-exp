@@ -90,8 +90,15 @@ routerAll.get("/categorias/edit/:id", (req, res) => {
 
 routerAll.post("/categorias/edit/", (req, res) => {
  
+  
+
   let filter = { _id: req.body.id }
   let update = { nome: req.body.nome, slug: req.body.slug }
+
+  CategoriaDaqui.findOne(filter).then((categoria) => {
+    
+    console.log(filter)
+  })
 
   CategoriaDaqui.findOneAndUpdate( filter,update ).then(() => {
     console.log(filter);
