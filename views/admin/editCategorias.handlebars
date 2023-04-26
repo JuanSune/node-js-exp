@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body">
-      <input type="hidden" name="id" value="{{categoria._id}}" id="id">
+      
   <form action="/admin/categorias/edit/" method="post">
     <label for="">Nome: </label>
     <input
@@ -23,6 +23,7 @@
       class="form-control"
       value="{{categoria.nome}}"
     />
+    <input type="hidden" name="id" value="{{categoria._id}}" id="id">
     <label for="">Slug: </label>
     <input
       type="text"
