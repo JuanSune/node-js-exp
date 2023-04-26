@@ -91,18 +91,18 @@ routerAll.get("/categorias/edit/:id", (req, res) => {
 routerAll.post("/categorias/edit/", (req, res) => {
  
   
-
+  let filter_2 = { _id: req.document.getElementById('id').value }
   let filter = { _id: req.body.id }
   let update = { nome: req.body.nome, slug: req.body.slug }
 
   CategoriaDaqui.findOne(filter).then((categoria) => {
-    
     console.log(filter)
   })
 
   CategoriaDaqui.findOneAndUpdate( filter,update ).then(() => {
     console.log(filter);
     console.log(req.body.nome);
+    console.log(filter_2)
     req.flash("msg_sucesso", "Categoria editada com sucesso!");
     res.redirect("/admin/categorias");
   }).catch(err => {
