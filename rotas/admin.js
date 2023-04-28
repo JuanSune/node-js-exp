@@ -89,34 +89,40 @@ routerAll.get("/categorias/edit/:id", (req, res) => {
 });
 
 routerAll.post("/categorias/edit/", (req, res) => {
- 
-  let filter = { _id: req.body.id }
-  let update = { nome: req.body.nome, slug: req.body.slug }
+  let filter = { _id: req.body.id };
+  let update = { nome: req.body.nome, slug: req.body.slug };
 
-  CategoriaDaqui.findOneAndUpdate( filter,update ).then(() => {
-    console.log(filter);
-    console.log(req.body.nome);
-    
-    req.flash("msg_sucesso", "Categoria editada com sucesso!");
-    res.redirect("/admin/categorias");
-  }).catch(err => {
-    req.flash("msg_erro", "Erro ao atualizar categoria")
-})
+  CategoriaDaqui.findOneAndUpdate(filter, update)
+    .then(() => {
+      console.log(filter);
+      console.log(req.body.nome);
+
+      req.flash("msg_sucesso", "Categoria editada com sucesso!");
+      res.redirect("/admin/categorias");
+    })
+    .catch((err) => {
+      req.flash("msg_erro", "Erro ao atualizar categoria");
+    });
 
   // res.send("Seja bem vindo, porque funcionou");
 });
 
 routerAll.post("/categorias/deletar/", (req, res) => {
- 
-  let filter = { _id: req.body.id }
+  let filter = { _id: req.body.id };
 
-  CategoriaDaqui.deleteOne(filter).then(() => {
-    req.flash("msg_sucesso", "Categoria APAGADA com sucesso!");
-    res.redirect("/admin/categorias");
-  }).catch(err => {
-    req.flash("msg_erro", "Erro ao APAGAR categoria")
-    res.redirect("/admin/categorias");
-})
+  CategoriaDaqui.deleteOne(filter)
+    .then(() => {
+      req.flash("msg_sucesso", "Categoria APAGADA com sucesso!");
+      res.redirect("/admin/categorias");
+    })
+    .catch((err) => {
+      req.flash("msg_erro", "Erro ao APAGAR categoria");
+      res.redirect("/admin/categorias");
+    });
+});
+
+routerAll.get("/postagens/", (req, res) => {
+  res.render("admin/postagem");
 });
 
 module.exports = routerAll;
