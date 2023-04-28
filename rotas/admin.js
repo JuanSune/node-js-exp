@@ -90,14 +90,8 @@ routerAll.get("/categorias/edit/:id", (req, res) => {
 
 routerAll.post("/categorias/edit/", (req, res) => {
  
-  
-  
   let filter = { _id: req.body.id }
   let update = { nome: req.body.nome, slug: req.body.slug }
-
-  CategoriaDaqui.findOne(filter).then((categoria) => {
-    console.log(filter)
-  })
 
   CategoriaDaqui.findOneAndUpdate( filter,update ).then(() => {
     console.log(filter);
@@ -108,9 +102,21 @@ routerAll.post("/categorias/edit/", (req, res) => {
   }).catch(err => {
     req.flash("msg_erro", "Erro ao atualizar categoria")
 })
-  ;
 
   // res.send("Seja bem vindo, porque funcionou");
+});
+
+routerAll.post("/categorias/deletar/", (req, res) => {
+ 
+  let filter = { _id: req.body.id }
+
+  CategoriaDaqui.deleteOne(filter).then(() => {
+    req.flash("msg_sucesso", "Categoria APAGADA com sucesso!");
+    res.redirect("/admin/categorias");
+  }).catch(err => {
+    req.flash("msg_erro", "Erro ao APAGAR categoria")
+    res.redirect("/admin/categorias");
+})
 });
 
 module.exports = routerAll;

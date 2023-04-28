@@ -7,17 +7,23 @@
       <h4>
         {{nome}}
       </h4>
-      
+
       <small>
         {{slug}}
       </small>
-      <br>
-      <a href='/admin/categorias/edit/{{_id}}'>
-      <button class="btn btn-success mt-3" >Editar Categoria</button>
-    </a>
+      <br />
+      <a href="/admin/categorias/edit/{{_id}}">
+        <button class="btn btn-success mt-3">Editar Categoria</button>
+      </a>
+      <form action="/admin/categorias/deletar/" method="post">
+      <input type="hidden" name="id" value="{{_id}}">
+        <button type="submit" class="btn btn-danger mt-3"> Apagar Categoria</button>
+      </form>
+
     </div>
-    
+
   </div>
 
 {{else}}
+  <h4 class="mt-4"> Nao nenhuma categoria</h4>
 {{/each}}
