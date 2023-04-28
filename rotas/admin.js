@@ -125,4 +125,11 @@ routerAll.get("/postagens/", (req, res) => {
   res.render("admin/postagem");
 });
 
+routerAll.get("/postagens/add", (req, res) => {
+  CategoriaDaqui.find().then((categoria) => {
+    res.render("admin/addPostagens",{categorias:categorias});
+  })
+  
+});
+
 module.exports = routerAll;
