@@ -2,8 +2,11 @@ const expressADMIN = require("express");
 
 const routerAll = expressADMIN.Router();
 
+require('../models/Postagens');
+
 const mongooseModule = require("mongoose");
 require("../models/Categoria");
+
 
 const CategoriaDaqui = mongooseModule.model("categorias");
 
