@@ -1,4 +1,4 @@
-{{!-- <div class="card">
+ <div class="card">
   <div class="card-body">
     <h4 class="mt-1">Nova Postagem:</h4>
     <form action="">
@@ -11,7 +11,7 @@
       <label for="conteudo">Conteudo: </label>
       <textarea name="conteudo" class="form-control"></textarea>
       <label for="categoria">Categoria: </label>
-      <select name="categoria" id="">
+      <select name="categoria" id="" class="form-select">
         {{#each categorias}}
           <option value="{{_id}}">{{nome}}</option>
         {{else}}
@@ -21,4 +21,4 @@
       <button class="btn btn-success mt-3" type="submit">Criar Postagem</button>
     </form>
   </div>
-</div> --}}
+</div> 
