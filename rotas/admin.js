@@ -7,6 +7,8 @@ require("../models/Categoria");
 
 const CategoriaDaqui = mongooseModule.model("categorias");
 
+const ModelPostagem = mongooseModule.model("postagens");
+
 routerAll.get("/", (req, res) => {
   res.render("admin/index");
 });
@@ -131,5 +133,28 @@ routerAll.get("/postagens/add/", (req, res) => {
       res.render("admin/addPostagens",{categorias: categoria});
    })
 });
+
+routerAll.post("/postagem/nova", (req, res) => {
+
+  const novaPostagem = {
+    titulo: req.body.titulo,
+    slug: req.body.slug,
+    categoria: req.body.categoria,
+    conteudo: req.body.conteudo,
+    descricao: req.body.descricao
+
+  }
+
+  new ModelPostagem(novaPostagem)
+  .save()
+  .then(() => {
+    req.flash("msg_sucesso", "POSTAGEM criada com sucesso!");
+    res.redirect("/admin/postagens");
+  })
+  .catch((err) => {
+    req.flash("msg_erro", "A POSTAGEM NAO FOI CRIADA COM SUCESSO nao foi criada");
+    res.redirect("/admin/postagens");
+  });
+})
 
 module.exports = routerAll;
