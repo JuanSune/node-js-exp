@@ -127,7 +127,8 @@ routerAll.post("/categorias/deletar/", (req, res) => {
 });
 
 routerAll.get("/postagens/", (req, res) => {
-  res.render("admin/postagem");
+  ModelPostagem.find().lean().populate({path: 'categoria', strictPopulate: false}).then(
+  ( postagens) => {res.render("admin/postagem", {postagem: postagens})})
 });
 
 routerAll.get("/postagens/add/", (req, res) => {
@@ -153,11 +154,37 @@ routerAll.post("/postagem/nova", (req, res) => {
   .then(() => {
     req.flash("msg_sucesso", "POSTAGEM criada com sucesso!");
     res.redirect("/admin/postagens");
+
   })
   .catch((err) => {
     req.flash("msg_erro", "A POSTAGEM NAO FOI CRIADA COM SUCESSO nao foi criada");
     res.redirect("/admin/postagens");
   });
+})
+
+routerAll.get("/postagens/edit/:id", (req,res) => {
+  ModelPostagem.findOne({ _id: req.params.id })
+    .lean()
+    .then((postagem) => {
+      res.render("admin/editCategorias", { postagem: postagem });
+    })
+})
+
+routerAll.post
+("/postagens/edit/",(req,res) => {
+
+  let filter = { _id: req.body.id };
+  let update = { titulo: req.body.titulo, slug: req.body.slug, conteudo: req.body.conteudo, descricao: req.body.descricao};
+
+  ModelPostagem.findOneAndUpdate(filter, update)
+    .then(() => {
+      req.flash("msg_sucesso", "POSTAGEM editada com sucesso!");
+      res.redirect("/admin/postagens")
+    })
+    .catch((err) => {
+      req.flash("msg_erro", "Erro ao atualizar categoria");
+      res.redirect("/admin/postagens")
+    });
 })
 
 module.exports = routerAll;

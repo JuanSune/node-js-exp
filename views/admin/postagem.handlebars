@@ -2,6 +2,20 @@
 <hr />
 <a href="/admin/postagens/add"><button class="btn btn-success">Nova Postagem</button></a>
 
-{{#each}}
+{{#each postagem}}
+
+  <div class="card">
+    <div class="card-body">
+      <input type="hidden" name="id" value="{{_id}}" />
+      <h4>{{titulo}}</h4>
+      <p>{{conteudo}}</p>
+      <small>{{categoria.nome}}</small>
+    </div>
+  </div>
 {{else}}
+  <p>Nenhuma Registrada</p>
 {{/each}}
+
+<a href="/admin/postagens/edit/{{_id}}">
+  <button class="btn btn-success mt-3">Editar POSTAGEM</button>
+</a>
