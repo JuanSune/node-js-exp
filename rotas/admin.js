@@ -166,7 +166,7 @@ routerAll.get("/postagens/edit/:id", (req,res) => {
   ModelPostagem.findOne({ _id: req.params.id })
     .lean()
     .then((postagem) => {
-      res.render("admin/editCategorias", { postagem: postagem });
+      res.render("admin/editPostagens", { postagem: postagem });
     })
 })
 

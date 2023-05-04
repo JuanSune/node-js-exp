@@ -10,12 +10,11 @@
       <h4>{{titulo}}</h4>
       <p>{{conteudo}}</p>
       <small>{{categoria.nome}}</small>
+      <a href="/admin/postagens/edit/{{_id}}">
+        <button class="btn btn-success mt-3">Editar POSTAGEM</button>
+      </a>
     </div>
   </div>
 {{else}}
   <p>Nenhuma Registrada</p>
 {{/each}}
-
-<a href="/admin/postagens/edit/{{_id}}">
-  <button class="btn btn-success mt-3">Editar POSTAGEM</button>
-</a>
