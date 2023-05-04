@@ -187,4 +187,18 @@ routerAll.post
     });
 })
 
+routerAll.post("/postagens/deletar/", (req, res) => {
+  let filter = { _id: req.body.id };
+
+  ModelPostagem.deleteOne(filter)
+    .then(() => {
+      req.flash("msg_sucesso", "POSTAGEM APAGADA com sucesso!");
+      res.redirect("/admin/postagens");
+    })
+    .catch((err) => {
+      req.flash("msg_erro", "Erro ao APAGAR categoria");
+      res.redirect("/admin/postagens");
+    });
+});
+
 module.exports = routerAll;
