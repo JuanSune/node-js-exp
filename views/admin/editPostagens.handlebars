@@ -33,10 +33,10 @@
       <textarea
         name="conteudo"
         class="form-control"
-        aria-valuetext="{{postagem.conteudo}}"
-      ></textarea>
+        
+      >{{postagem.conteudo}}</textarea>
       <label for="categoria">Categoria: </label>
-       <select name="categoria" id="" class="form-select">
+       <select name="categoria" class="form-select">
         {{#each categorias}}
           <option value="{{_id}}">{{nome}}</option>
         {{else}}
@@ -47,3 +47,4 @@
     </form>
   </div>
 </div>
+

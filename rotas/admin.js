@@ -13,7 +13,7 @@ const CategoriaDaqui = mongooseModule.model("categorias");
 const ModelPostagem = mongooseModule.model("postagens");
 
 routerAll.get("/", (req, res) => {
-  res.render("admin/index");
+  res.render("index");
 });
 
 routerAll.get("/posts", (req, res) => {
@@ -166,7 +166,13 @@ routerAll.get("/postagens/edit/:id", (req,res) => {
   ModelPostagem.findOne({ _id: req.params.id })
     .lean()
     .then((postagem) => {
-      res.render("admin/editPostagens", { postagem: postagem });
+      CategoriaDaqui.find().lean().then((categoria) => {
+        res.render("admin/editPostagens", { postagem: postagem, categorias: categoria});
+
+      });
+      
+      
+      
     })
 })
 
@@ -174,7 +180,7 @@ routerAll.post
 ("/postagens/edit/",(req,res) => {
 
   let filter = { _id: req.body.id };
-  let update = { titulo: req.body.titulo, slug: req.body.slug, conteudo: req.body.conteudo, descricao: req.body.descricao};
+  let update = { titulo: req.body.titulo, slug: req.body.slug, conteudo: req.body.conteudo, descricao: req.body.descricao, categoria: req.body.categoria};
 
   ModelPostagem.findOneAndUpdate(filter, update)
     .then(() => {
