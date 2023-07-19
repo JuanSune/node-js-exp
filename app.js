@@ -56,6 +56,9 @@ const flashModule = require("connect-flash");
 
 // Rotas --- COLOQUE AS ROTAS ABAIXO DA SUA CONFIGURAÇÃO
 
+    appMod.get("/", (req, res) => {
+        res.render("index");
+    });
     appMod.use('/admin',adminImport);
 
 

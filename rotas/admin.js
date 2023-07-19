@@ -12,9 +12,7 @@ const CategoriaDaqui = mongooseModule.model("categorias");
 
 const ModelPostagem = mongooseModule.model("postagens");
 
-routerAll.get("/", (req, res) => {
-  res.render("index");
-});
+
 
 routerAll.get("/posts", (req, res) => {
   res.send("Pagina de posts");
