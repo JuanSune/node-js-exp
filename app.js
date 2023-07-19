@@ -67,8 +67,12 @@ const PostagemApp = mongooseModule.model("postagens")
  
     });
 
-    appMod.get("/postagem", (req, res) => {
-        res.render("./postagem/index")
+    appMod.get("/postagem/:n", (req, res) => {
+        
+        PostagemApp.findOne({slug: req.params.n}).lean().then((postagemI) => {
+            res.render("./postagem/index", {postagem: postagemI})
+        });
+       
     });
     appMod.use('/admin',adminImport);
 
