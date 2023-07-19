@@ -19,6 +19,10 @@ const sessionModule = require("express-session");
 
 const flashModule = require("connect-flash");
 
+require("./models/Postagens")
+
+const PostagemApp = mongooseModule.model("postagens")
+
 
 
 // Configuraçoes
@@ -57,7 +61,14 @@ const flashModule = require("connect-flash");
 // Rotas --- COLOQUE AS ROTAS ABAIXO DA SUA CONFIGURAÇÃO
 
     appMod.get("/", (req, res) => {
-        res.render("index");
+        PostagemApp.find().lean().populate("categoria").sort({data: "desc"}).then((postagem) => {
+            res.render("index",{postagem: postagem});
+        })
+ 
+    });
+
+    appMod.get("/postagem", (req, res) => {
+        res.render("./postagem/index")
     });
     appMod.use('/admin',adminImport);
 
