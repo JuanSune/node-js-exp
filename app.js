@@ -23,6 +23,10 @@ require("./models/Postagens")
 
 const PostagemApp = mongooseModule.model("postagens")
 
+const usuarioImport = require('./rotas/usuarios')
+
+
+
 
 
 // Configuraçoes
@@ -74,7 +78,12 @@ const PostagemApp = mongooseModule.model("postagens")
         });
        
     });
+
+    // o AppMod.use define o nome da rota no primeiro parametro
+    // e no segundo qual o grupo de rotas a ser usado
     appMod.use('/admin',adminImport);
+
+    appMod.use('/usuarios',usuarioImport);
 
 
 
