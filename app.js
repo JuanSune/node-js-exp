@@ -25,7 +25,9 @@ const PostagemApp = mongooseModule.model("postagens")
 
 const usuarioImport = require('./rotas/usuarios')
 
+const passport = require("passport")
 
+require("./config/auth")(passport)
 
 
 
@@ -38,6 +40,11 @@ const usuarioImport = require('./rotas/usuarios')
         resave: true,
         saveUninitialized: true
     }));
+
+    // Tem que ser depois da sessao e antes do flash
+    appMod.use(passport.initialize())
+    appMod.use(passport.session())
+
     appMod.use(flashModule());
     // Middleware
     appMod.use((req, res, next) => {
