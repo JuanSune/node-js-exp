@@ -27,7 +27,6 @@ const usuarioImport = require('./rotas/usuarios')
 
 const passport = require("passport")
 
-require("./config/auth")(passport)
 
 
 
@@ -50,6 +49,8 @@ require("./config/auth")(passport)
     appMod.use((req, res, next) => {
         res.locals.msg_sucesso = req.flash("msg_sucesso") 
         res.locals.msg_erro = req.flash("msg_erro") 
+        res.locals.error = req.flash("error")
+        res.locals.user = req.user || null
         next()
     });
 

@@ -12,13 +12,16 @@ const CategoriaDaqui = mongooseModule.model("categorias");
 
 const ModelPostagem = mongooseModule.model("postagens");
 
+require("./config/auth")(passport)
+
+const {eAdmin} = require("../helpers/eAdmin")
 
 
-routerAll.get("/posts", (req, res) => {
+routerAll.get("/posts", eAdmin, (req, res) => {
   res.send("Pagina de posts");
 });
 
-routerAll.get("/categorias", (req, res) => {
+routerAll.get("/categorias", eAdmin, (req, res) => {
   CategoriaDaqui.find()
     .lean()
     .then((categorias) => {
@@ -33,11 +36,11 @@ routerAll.get("/categorias", (req, res) => {
     });
 });
 
-routerAll.get("/categorias/add", (req, res) => {
+routerAll.get("/categorias/add", eAdmin, (req, res) => {
   res.render("admin/addCategorias");
 });
 
-routerAll.post("/categorias/nova", (req, res) => {
+routerAll.post("/categorias/nova", eAdmin, (req, res) => {
   var errosVar = [];
 
   if (
@@ -79,7 +82,7 @@ routerAll.post("/categorias/nova", (req, res) => {
   }
 });
 
-routerAll.get("/categorias/edit/:id", (req, res) => {
+routerAll.get("/categorias/edit/:id", eAdmin, (req, res) => {
   CategoriaDaqui.findOne({ _id: req.params.id })
     .lean()
     .then((categoria) => {
@@ -91,7 +94,7 @@ routerAll.get("/categorias/edit/:id", (req, res) => {
     });
 });
 
-routerAll.post("/categorias/edit/", (req, res) => {
+routerAll.post("/categorias/edit/", eAdmin, (req, res) => {
   let filter = { _id: req.body.id };
   let update = { nome: req.body.nome, slug: req.body.slug };
 
@@ -110,7 +113,7 @@ routerAll.post("/categorias/edit/", (req, res) => {
   // res.send("Seja bem vindo, porque funcionou");
 });
 
-routerAll.post("/categorias/deletar/", (req, res) => {
+routerAll.post("/categorias/deletar/", eAdmin, (req, res) => {
   let filter = { _id: req.body.id };
 
   CategoriaDaqui.deleteOne(filter)
@@ -124,19 +127,19 @@ routerAll.post("/categorias/deletar/", (req, res) => {
     });
 });
 
-routerAll.get("/postagens/", (req, res) => {
+routerAll.get("/postagens/", eAdmin, (req, res) => {
   ModelPostagem.find().lean().populate({path: 'categoria', strictPopulate: false}).then(
   ( postagens) => {res.render("admin/postagem", {postagem: postagens})})
 });
 
-routerAll.get("/postagens/add/", (req, res) => {
+routerAll.get("/postagens/add/", eAdmin, (req, res) => {
  
     CategoriaDaqui.find().lean().then((categoria) => {
       res.render("admin/addPostagens",{categorias: categoria});
    })
 });
 
-routerAll.post("/postagem/nova", (req, res) => {
+routerAll.post("/postagem/nova", eAdmin, (req, res) => {
 
   const novaPostagem = {
     titulo: req.body.titulo,
@@ -160,7 +163,7 @@ routerAll.post("/postagem/nova", (req, res) => {
   });
 })
 
-routerAll.get("/postagens/edit/:id", (req,res) => {
+routerAll.get("/postagens/edit/:id", eAdmin, (req,res) => {
   ModelPostagem.findOne({ _id: req.params.id })
     .lean()
     .then((postagem) => {
@@ -175,7 +178,7 @@ routerAll.get("/postagens/edit/:id", (req,res) => {
 })
 
 routerAll.post
-("/postagens/edit/",(req,res) => {
+("/postagens/edit/", eAdmin, (req,res) => {
 
   let filter = { _id: req.body.id };
   let update = { titulo: req.body.titulo, slug: req.body.slug, conteudo: req.body.conteudo, descricao: req.body.descricao, categoria: req.body.categoria};
@@ -191,7 +194,7 @@ routerAll.post
     });
 })
 
-routerAll.post("/postagens/deletar/", (req, res) => {
+routerAll.post("/postagens/deletar/", eAdmin, (req, res) => {
   let filter = { _id: req.body.id };
 
   ModelPostagem.deleteOne(filter)

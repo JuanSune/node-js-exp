@@ -20,7 +20,7 @@ rota.get("/login", (req, res) => {
 rota.post("/login",(req,res,next) => {
     passport.authenticate("local", {
         successRedirect: "/",
-        failureRedirect: "usuario/login",
+        failureRedirect: "/usuarios/login",
         failureFlash: true
     })(req, res, next)
 })
@@ -86,11 +86,7 @@ rota.post("/registro", (req, res) => {
                 })
             }
         })
-    }
-    
-       
-
-    
+    }    
 })
 
 module.exports = rota;
