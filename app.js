@@ -27,7 +27,7 @@ const usuarioImport = require('./rotas/usuarios')
 
 const passport = require("passport")
 
-
+require("./config/auth")(passport)
 
 
 // Configuraçoes
@@ -50,7 +50,7 @@ const passport = require("passport")
         res.locals.msg_sucesso = req.flash("msg_sucesso") 
         res.locals.msg_erro = req.flash("msg_erro") 
         res.locals.error = req.flash("error")
-        res.locals.user = req.user || null
+        res.locals.user = req.user || null;
         next()
     });
 

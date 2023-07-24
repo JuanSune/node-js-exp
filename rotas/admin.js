@@ -12,7 +12,7 @@ const CategoriaDaqui = mongooseModule.model("categorias");
 
 const ModelPostagem = mongooseModule.model("postagens");
 
-require("./config/auth")(passport)
+
 
 const {eAdmin} = require("../helpers/eAdmin")
 
