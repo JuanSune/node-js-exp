@@ -6,7 +6,7 @@ const handlebarsMod = require('express-handlebars');
 
 const appMod = expressMod();
 
-const PORT = 8081;
+const PORT = 8081 || process.env.PORT;
 
 const adminImport = require('./rotas/admin');
 
